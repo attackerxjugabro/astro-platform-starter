@@ -40,6 +40,16 @@ export default function NewShape(props: Props) {
         }
         setWasUploaded(true);
         setLastMutationTime(Date.now());
+        if ((window as any).pendo) {
+            (window as any).pendo.track("shape_uploaded", {
+                name: blobData.parameters.name,
+                edges: blobData.parameters.edges,
+                growth: blobData.parameters.growth,
+                size: blobData.parameters.size,
+                seed: blobData.parameters.seed,
+                colors: blobData.parameters.colors.join(",")
+            });
+        }
     };
 
     useEffect(() => {
