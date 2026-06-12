@@ -34,11 +34,9 @@ export default function StoredShapes(props: Props) {
         const data = await response.json();
         if (data.blob) {
             setPreviewData(generateBlob(data.blob));
-
             if (typeof pendo !== 'undefined') {
                 pendo.track('blob_shape_retrieved', {
-                    shape_key: key,
-                    total_stored_shapes: keys.length
+                    key: key
                 });
             }
         }

@@ -27,21 +27,19 @@ export default function NewShape(props: Props) {
         const data = await response.json();
         if (data.message) {
             console.log(data.message);
+            if (typeof pendo !== 'undefined') {
+                pendo.track('blob_shape_uploaded', {
+                    name: blobData.parameters?.name,
+                    edges: blobData.parameters?.edges,
+                    growth: blobData.parameters?.growth,
+                    size: blobData.parameters?.size,
+                    seed: blobData.parameters?.seed,
+                    colors: blobData.parameters?.colors?.join(',')
+                });
+            }
         }
         setWasUploaded(true);
         setLastMutationTime(Date.now());
-
-        if (typeof pendo !== 'undefined') {
-            pendo.track('blob_shape_uploaded', {
-                shape_name: blobData.parameters?.name,
-                edges: blobData.parameters?.edges,
-                growth: blobData.parameters?.growth,
-                size: blobData.parameters?.size,
-                seed: blobData.parameters?.seed,
-                color_start: blobData.parameters?.colors?.[0],
-                color_end: blobData.parameters?.colors?.[1]
-            });
-        }
     };
 
     useEffect(() => {
