@@ -51,6 +51,13 @@ const exampleTag = tags[randomInt(0, tags.length - 1)];
             headers: {
                 'Content-Type': 'application/json'
             }
+        }).then(() => {
+            if (typeof pendo !== 'undefined') {
+                pendo.track('cache_tag_invalidated', {
+                    tag: tag,
+                    invalidated_tags_count: 1
+                });
+            }
         });
         alert(`Invalidated tag: ${tag}`);
     }

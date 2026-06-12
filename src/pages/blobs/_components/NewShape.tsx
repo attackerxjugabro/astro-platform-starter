@@ -30,6 +30,18 @@ export default function NewShape(props: Props) {
         }
         setWasUploaded(true);
         setLastMutationTime(Date.now());
+
+        if (typeof pendo !== 'undefined') {
+            pendo.track('blob_shape_uploaded', {
+                shape_name: blobData.parameters?.name,
+                edges: blobData.parameters?.edges,
+                growth: blobData.parameters?.growth,
+                size: blobData.parameters?.size,
+                seed: blobData.parameters?.seed,
+                color_start: blobData.parameters?.colors?.[0],
+                color_end: blobData.parameters?.colors?.[1]
+            });
+        }
     };
 
     useEffect(() => {
