@@ -27,9 +27,29 @@ export default function NewShape(props: Props) {
         const data = await response.json();
         if (data.message) {
             console.log(data.message);
+            if (typeof pendo !== 'undefined') {
+                pendo.track('blob_shape_uploaded', {
+                    name: blobData.parameters?.name,
+                    edges: blobData.parameters?.edges,
+                    growth: blobData.parameters?.growth,
+                    size: blobData.parameters?.size,
+                    seed: blobData.parameters?.seed,
+                    colors: blobData.parameters?.colors?.join(',')
+                });
+            }
         }
         setWasUploaded(true);
         setLastMutationTime(Date.now());
+        if ((window as any).pendo) {
+            (window as any).pendo.track("shape_uploaded", {
+                name: blobData.parameters.name,
+                edges: blobData.parameters.edges,
+                growth: blobData.parameters.growth,
+                size: blobData.parameters.size,
+                seed: blobData.parameters.seed,
+                colors: blobData.parameters.colors.join(",")
+            });
+        }
     };
 
     useEffect(() => {

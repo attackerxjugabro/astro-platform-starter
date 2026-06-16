@@ -51,8 +51,20 @@ const exampleTag = tags[randomInt(0, tags.length - 1)];
             headers: {
                 'Content-Type': 'application/json'
             }
+        }).then(() => {
+            if (typeof pendo !== 'undefined') {
+                pendo.track('cache_tag_invalidated', {
+                    tag: tag
+                });
+            }
         });
         alert(`Invalidated tag: ${tag}`);
+        if ((window as any).pendo) {
+            (window as any).pendo.track("cache_tag_invalidated", {
+                tag: tag,
+                tags_count: 1
+            });
+        }
     }
 
     const revalidateButton = document.querySelectorAll('button.revalidate-button')[0];
