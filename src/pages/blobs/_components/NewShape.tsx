@@ -27,6 +27,16 @@ export default function NewShape(props: Props) {
         const data = await response.json();
         if (data.message) {
             console.log(data.message);
+            if (typeof pendo !== 'undefined') {
+                pendo.track('blob_shape_uploaded', {
+                    shape_name: blobData.parameters?.name,
+                    edges: blobData.parameters?.edges,
+                    growth: blobData.parameters?.growth,
+                    seed: blobData.parameters?.seed,
+                    size: blobData.parameters?.size,
+                    colors: JSON.stringify(blobData.parameters?.colors)
+                });
+            }
         }
         setWasUploaded(true);
         setLastMutationTime(Date.now());
