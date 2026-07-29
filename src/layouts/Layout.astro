@@ -21,6 +21,38 @@ const { title } = Astro.props;
         <meta name="generator" content={Astro.generator} />
         <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
         <link rel="preload" as="font" type="font/woff2" href={interWoff2} crossorigin />
+        <script is:inline>
+            (function (apiKey) {
+                (function (p, e, n, d, o) {
+                    var v, w, x, y, z;
+                    o = p[d] = p[d] || {};
+                    o._q = o._q || [];
+                    v = ['initialize', 'identify', 'updateOptions', 'pageLoad', 'track', 'trackAgent'];
+                    for (w = 0, x = v.length; w < x; ++w)
+                        (function (m) {
+                            o[m] =
+                                o[m] ||
+                                function () {
+                                    o._q[m === v[0] ? 'unshift' : 'push']([m].concat([].slice.call(arguments, 0)));
+                                };
+                        })(v[w]);
+                    y = e.createElement(n);
+                    y.async = !0;
+                    y.src = 'https://cdn.pendo.io/agent/static/' + apiKey + '/pendo.js';
+                    z = e.getElementsByTagName(n)[0];
+                    z.parentNode.insertBefore(y, z);
+                })(window, document, 'script', 'pendo');
+            })(
+                'eyJhbGciOiJSUzI1NiIsInR5cCI6IkpXVCJ9.eyJkYXRhY2VudGVyIjoidXMiLCJrZXkiOiJlYTY3MGU1ZmY0NDM1ZWVlNGMyNjZiYjZlOWYzYzkzZjA0ODgzYWI5OGU2MmY0YjViMDdkMjgwZjMzNGQwODIzOTE2OWJjMjg2Yjg3N2Y2ZDdiZGFlNWE4NDg5MDZkZjgzN2UwNjhjYzllYjZjNzQyMjE2YzgyZWEzNGYwNmQ3MTg1N2EyMWU5NWY4NjRhM2U4NTdlNGU5OGRlZDNmNDRhY2FjOWM5OGYyYmQ3YTg3OWY4M2ZkZDQxYzcyNGM5OTguMDc2NWQ3NjJmMDU5OGMyM2M3MzZlMjg0NjFiNGJlMzAuYTM4YmY3ZWU1OGU5Y2IzZTkyNDRmYmU0MzFkYTRiMmE0YTk0OGE3MzUxZjhjMDM2NWQyOGYxNTQ2YTc3NWJkMCJ9.bZl9YytH3HKfod3pDUu1uK-mr08kxwDRhtNYAz8_b_TXEYzDwkE1rQbmjrZz5Ijk56Si6kKlSf4rOaEf2g8wu2PGPfqL7gLBtGmC7Mc9VRH9jSCaI5Ew6sgXIsBiIN2syH-XmFdrby-8kKjSzcvyqVgkRg6v5Q4A0Y0gIrye3Ts'
+            );
+        </script>
+        <script is:inline>
+            pendo.initialize({
+                visitor: {
+                    id: ''
+                }
+            });
+        </script>
     </head>
     <body class="antialiased text-white bg-complementary">
         <div class="flex flex-col min-h-screen px-6 bg-noise sm:px-12">
